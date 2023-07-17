@@ -5,9 +5,9 @@ import lombok.Data;
 
 @Data
 @Builder
-public class PushBOWrapper {
+public class ConsumeBOWrapper {
 
-    private PushBO content;
+    private byte[] content;
 
-    private String topic;
+    private String transportType;
 }

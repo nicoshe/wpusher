@@ -3,6 +3,7 @@ package com.nicos.wpusher.pusher.handler;
 import com.nicos.wpusher.common.PushType;
 import com.nicos.wpusher.common.bo.PushBO;
 import com.nicos.wpusher.common.bo.PushBOWrapper;
+import com.nicos.wpusher.common.util.SerializationUtil;
 import com.nicos.wpusher.serialization.Serialization;
 import com.nicos.wpusher.serialization.SerializationFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,9 +26,10 @@ public class KafkaPusherHandler implements PusherHandler {
 
     @Override
     public void push(PushBOWrapper push) {
-        Serialization serialization = serializationFactory.getSerialization(push.getTransportType());
         PushBO pushBO = push.getContent();
-        byte[] content = serialization.serialize(push.getContent());
-        kafkaTemplate.send(push.getTopic(), pushBO.getId(), content);
+        Serialization serialization = serializationFactory.getSerialization(pushBO.getTransportType());
+        byte[] content = serialization.serialize(pushBO);
+        byte[] contentWrapper = SerializationUtil.getInstance().wrap(content, pushBO.getTransportType());
+        kafkaTemplate.send(push.getTopic(), pushBO.getId(), contentWrapper);
     }
 }

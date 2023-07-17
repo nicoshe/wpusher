@@ -29,4 +29,9 @@ public class PushBO {
      * 推送类型
      */
     private String type;
+
+    /**
+     *
+     */
+    private String transportType;
 }

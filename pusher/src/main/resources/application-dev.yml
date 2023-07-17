@@ -3,9 +3,10 @@ spring:
     producer:
       bootstrap-servers: 127.0.0.1:9092
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.BytesSerializer
 
 mpusher:
   push:
     type: kafka
     transportType: json
+    topic: push-message

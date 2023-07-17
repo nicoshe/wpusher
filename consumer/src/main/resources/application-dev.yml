@@ -1,0 +1,17 @@
+spring:
+  kafka:
+    consumer:
+      group-id: wp-consumer
+      bootstrap-servers: 127.0.0.1:9092
+      enable-auto-commit: false
+      auto-offset-reset: latest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.BytesSerializer
+      max-poll-records: 50
+    listener:
+      ack-mode: manual_immediate
+      type: batch
+
+mpusher:
+  consumer:
+    type: hbase

@@ -26,7 +26,6 @@ public class PushService {
         PushBOWrapper wrapper = PushBOWrapper
                 .builder()
                 .content(pushBO)
-                .transportType(pushConfig.getTransportType())
                 .topic(pushConfig.getTopic())
                 .build();
         pusherHandler.push(wrapper);

@@ -1,5 +1,6 @@
 package com.nicos.wpusher.serialization;
 
+import com.nicos.wpusher.common.bo.ConsumeBOWrapper;
 import com.nicos.wpusher.common.bo.PushBO;
 
 public interface Serialization {
@@ -11,4 +12,6 @@ public interface Serialization {
     String getType();
 
     byte[] serialize(PushBO content);
+
+    <T> T deserialize(ConsumeBOWrapper contentWrapper, Class<T> clazz);
 }
